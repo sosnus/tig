@@ -18,26 +18,26 @@ services:
       DOCKER_INFLUXDB_INIT_RETENTION: ${DOCKER_INFLUXDB_INIT_RETENTION}
       DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${DOCKER_INFLUXDB_INIT_ADMIN_TOKEN}
 
-telegraf:
-  image: telegraf:1.30
-  container_name: telegraf
-  restart: unless-stopped
-  depends_on:
-    - influxdb
-  environment:
-    TELEGRAF_AGENT_INTERVAL: 10s
+  telegraf:
+    image: telegraf:1.30
+    container_name: telegraf
+    restart: unless-stopped
+    depends_on:
+      - influxdb
+    environment:
+      TELEGRAF_AGENT_INTERVAL: 10s
 
-    # Output → InfluxDB v2
-    TELEGRAF_OUTPUTS_INFLUXDB_V2_URLS: '["http://influxdb:8086"]'
-    TELEGRAF_OUTPUTS_INFLUXDB_V2_TOKEN: ${INFLUX_TOKEN}
-    TELEGRAF_OUTPUTS_INFLUXDB_V2_ORGANIZATION: ${INFLUX_ORG}
-    TELEGRAF_OUTPUTS_INFLUXDB_V2_BUCKET: ${INFLUX_BUCKET}
+      # Output → InfluxDB v2
+      TELEGRAF_OUTPUTS_INFLUXDB_V2_URLS: '["http://influxdb:8086"]'
+      TELEGRAF_OUTPUTS_INFLUXDB_V2_TOKEN: ${INFLUX_TOKEN}
+      TELEGRAF_OUTPUTS_INFLUXDB_V2_ORGANIZATION: ${INFLUX_ORG}
+      TELEGRAF_OUTPUTS_INFLUXDB_V2_BUCKET: ${INFLUX_BUCKET}
 
-    # Inputs
-    TELEGRAF_INPUTS_CPU: "true"
-    TELEGRAF_INPUTS_MEM: "true"
-    TELEGRAF_INPUTS_DISK: "true"
-    TELEGRAF_INPUTS_NET: "true"
+      # Inputs
+      TELEGRAF_INPUTS_CPU: "true"
+      TELEGRAF_INPUTS_MEM: "true"
+      TELEGRAF_INPUTS_DISK: "true"
+      TELEGRAF_INPUTS_NET: "true"
 
   grafana:
     image: grafana/grafana:10.4.3
