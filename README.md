@@ -1,1 +1,3 @@
-# tig
+# TIG Stack
+
+Telegraf + InfluxDB + Grafana
